@@ -1,109 +1,109 @@
-# Interaction: alert, prompt, confirm
+# Interacțiuni: alert, prompt, confirm
 
-In this part of the tutorial we cover JavaScript language "as is", without environment-specific tweaks.
+În această parte a tutorialului vom acoperi limbajul JavaScript așa cum este, fără modificari ambientale specifice.
 
-But we'll still be using the browser as our demo environment, so we should know at least a few of its user-interface functions. In this chapter, we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+Cu toate acestea, vom continua să folosim browserul ca mediu demonstrativ de lucru, așadar ar trebui să cunoaștem cel puțin câteva dintre funcțiile sale pentru interfața utilizatorului. În acest capitol ne vom familiariza cu funcțiile `alert`, `prompt` si `confirm` ale browserului.
 
 ## alert
 
-Syntax:
+Sintaxă:
 
 ```js
-alert(message);
+alert(mesaj);
 ```
 
-This shows a message and pauses script execution until the user presses "OK".
+Această funcție afișează un mesaj și întrerupe execuția scriptului până când utilizatorul apasă "OK".
 
-For example:
+De exemplu:
 
 ```js run
-alert("Hello");
+alert("Bună");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc. until they have dealt with the window. In this case -- until they press "OK".
+Mini-fereastra cu acest mesaj este denumită "fereastra formală". Cuvândul "formal" (în acest context) înseamna că vizitatorul nu poate interacționa cu restul paginii, apăsa alte butoane etc până când nu a rezolvat într-un fel sau altul problema cu această fereastră. În acest caz până când nu apasă "OK".
 
 ## prompt
 
-The function `prompt` accepts two arguments:
+Funcția `prompt` acceptă două argumente:
 
 ```js no-beautify
-result = prompt(title, [default]);
+result = prompt(titlu, [implicit]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+Afișează o fereastră formală cu un mesaj text, un câmp de intrare pentru vizitator și butoanele OK/Anuleaza.
 
-`title`
-: The text to show the visitor.
+`titlu`
+: Textul care va fi afișat vizitatorului.
 
-`default`
-: An optional second parameter, the initial value for the input field.
+`implicit`
+: Un parametru secundar opțional reprezentând valoarea inițiala pentru câmpul de intrare.
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key.
+Vizitatorul poate să introducă un text în câmpul prompt și să apese OK. Sau poate să anuleze apăsând butonul Anulare sau apăsând tasta `key:Esc`.
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+Apelarea funcției `prompt` returnează textul din câmpul de intrare sau `null`, dacă fereastra a fost anulată.
 
-For instance:
+De exemplu:
 
 ```js run
-let age = prompt('How old are you?', 100);
+let varsta = prompt('Câți ani ai?', 100);
 
-alert(`You are ${age} years old!`); // You are 100 years old!
+alert(`Ai ${varsta} ani!`); // Ai 100 ani!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="În IE: întotdeauna specificați un `implicit`"
+Al doilea parametru este opțional, dar dacă nu îl specificăm, Internet Explorer va insera textul `"undefined"` în câmpul de intrare.
 
-Run this code in Internet Explorer to see:
+Rulați acest cod în Internet Explorer pentru a vedea:
 
 ```js run
 let test = prompt("Test");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+Așadar, pentru ca prompturile să arate bine în IE, vă recomandăm să specificați întotdeauna al doilea argument:
 
 ```js run
-let test = prompt("Test", ''); // <-- for IE
+let test = prompt("Test", ''); // <-- pentru IE
 ```
 ````
 
 ## confirm
 
-The syntax:
+Sintaxa:
 
 ```js
-result = confirm(question);
+rezultat = confirm(intrebare);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+Funcția `confirm` afișează o fereastră formală cu o `intrebare` și două butoane: OK și Anulează.
 
-The result is `true` if OK is pressed and `false` otherwise.
+Rezultatul este `true` (adevărat) dacă OK este apăsat și `false` (fals) altfel.
 
-For example:
+De exemplu:
 
 ```js run
-let isBoss = confirm("Are you the boss?");
+let esteSef = confirm("Ești tu șeful?");
 
-alert( isBoss ); // true if OK is pressed
+alert( esteSef ); // true (adevarat) dacă OK este apăsat
 ```
 
-## Summary
+## Recapitulare
 
-We covered 3 browser-specific functions to interact with visitors:
+Am acoperit 3 funcții specifice ale browserului prin care se interacționează cu vizitatorii:
 
 `alert`
-: shows a message.
+: afișează un mesaj.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+: afișează un mesaj prin care cere utilizatorului să introducă text. Returnează textul sau, dacă butonul Anuleaza sau tasta `key:Esc` este apasată, `null`.
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+: afișează un mesaj și așteaptă utilizatorul să apese "OK" sau "Anulează". Returnează `true` (adevărat) pentru OK și `false` (fals) pentru Anuleaza/`key:Esc`.
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+Toate aceste metode sunt formale: ele întrerup execuția scriptului și nu permit vizitatorului să interacționeze cu restul paginii până când fereastra a fost îndepărtată.
 
-There are two limitations shared by all the methods above:
+Există două limitari împărtașite de toate metodele de mai sus:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. Locația exactă a ferestrei formale este determinată de browser. În general aceasta este în centru.
+2. Aspectul exact al ferestrei formale depinde, de asemenea, de browser. Ea nu poate fi modificată.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+Acesta este prețul simplității. Există alte căi pentru a afișa ferestre mai frumoase și mai bogate ca interactivitate, dar dacă "zorzoanele" nu contează atât de mult, aceste metode sunt cât se poate de potrivite.
